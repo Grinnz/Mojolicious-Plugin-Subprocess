@@ -1,34 +1,4 @@
-package Mojolicious::Plugin::Subprocess;
-
-use Mojo::Base 'Mojolicious::Plugin';
-use Mojo::IOLoop::Subprocess;
-use Scalar::Util 'weaken';
-
-our $VERSION = '0.001';
-
-sub register {
-  my ($self, $app, $options) = @_;
-  
-  my %subprocess_args = %{$options // {}};
-  
-  $app->helper(subprocess => sub {
-    my ($c, $child, $parent) = @_;
-    
-    my $subprocess = Mojo::IOLoop::Subprocess->new(%subprocess_args);
-    $subprocess->ioloop; # instantiate default
-    weaken $subprocess->{ioloop};
-    
-    $c->delay(sub {
-      $subprocess->run($child, shift->begin);
-    }, sub {
-      my ($delay, $err, @results) = @_;
-      die $err if $err;
-      $c->$parent(@results);
-    });
-  });
-}
-
-1;
+=pod
 
 =head1 NAME
 
@@ -123,3 +93,5 @@ This is free software, licensed under:
 =head1 SEE ALSO
 
 L<Mojo::IOLoop::Subprocess>, L<Mojolicious::Plugin::ForkCall>
+
+=cut
