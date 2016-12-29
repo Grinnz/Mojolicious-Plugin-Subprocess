@@ -64,7 +64,7 @@ L<Mojolicious::Plugin::Subprocess> is a L<Mojolicious> plugin that adds a
 L</"subprocess"> helper method to your application, which uses
 L<Mojo::IOLoop::Subprocess> to perform computationally expensive operations in
 subprocesses without blocking the event loop. Any options passed to the plugin
-will be used as attribute values for L<Mojo::IOLoop::Subprocess>.
+will be used as attributes to build the L<Mojo::IOLoop::Subprocess> object.
 
 Note that it does not increase the timeout of the connection, so if your forked
 process is going to take a very long time, you might need to increase that
@@ -89,8 +89,9 @@ L<Mojo::IOLoop::Subprocess/"run">, and execute the second callback in the
 parent process with the results. The callbacks are executed via
 L<Mojolicious::Plugin::DefaultHelpers/"delay">, which disables automatic
 rendering, keeps a reference to the transaction, and renders an exception
-response if an exception is thrown. This also means that the parent callback
-will not be called if an exception is thrown in the child callback.
+response if an exception is thrown in either callback. This also means that the
+parent callback will not be called if an exception is thrown in the child
+callback.
 
 =head1 METHODS
 
