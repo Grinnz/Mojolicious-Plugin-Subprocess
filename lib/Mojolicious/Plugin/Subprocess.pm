@@ -100,7 +100,7 @@ L<Mojolicious::Plugin> and implements the following new ones.
 =head2 register
 
  $plugin->register(Mojolicious->new);
- $plugin->register(Mojolicious->new, {ioloop => Mojo::IOLoop->new});
+ $plugin->register(Mojolicious->new, {ioloop => $ioloop});
 
 Register helper in L<Mojolicious> application.
 
