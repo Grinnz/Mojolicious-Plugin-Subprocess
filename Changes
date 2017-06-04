@@ -1,4 +1,5 @@
 {{$NEXT}}
+  - Add use_sereal option to simplify using Sereal for data serialization
 
 0.001     2016-12-28 22:11:44 EST
   - First release

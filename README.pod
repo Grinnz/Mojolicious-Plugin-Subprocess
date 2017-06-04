@@ -21,20 +21,23 @@ Mojolicious::Plugin::Subprocess - Subprocesses in Mojolicious applications
   };
   
   # or use Sereal as serializer
-  my $encoder = Sereal::Encoder->new;
-  my $decoder = Sereal::Decoder->new;
-  plugin 'Subprocess' => {
-    serialize => sub { $encoder->encode($_[0]) },
-    deserialize => sub { $decoder->decode($_[0]) },
-  };
+  plugin 'Subprocess' => {use_sereal => 1};
 
 =head1 DESCRIPTION
 
 L<Mojolicious::Plugin::Subprocess> is a L<Mojolicious> plugin that adds a
 L</"subprocess"> helper method to your application, which uses
 L<Mojo::IOLoop::Subprocess> to perform computationally expensive operations in
-subprocesses without blocking the event loop. Any options passed to the plugin
-will be used as attributes to build the L<Mojo::IOLoop::Subprocess> object.
+subprocesses without blocking the event loop.
+
+The option C<use_sereal> (requires L<Sereal> version 3.001 or higher) will use
+L<Sereal> for data serialization, which is faster than L<Storable> and supports
+serialization of more reference types such as C<Regexp>. The
+L<Sereal::Encoder/"FREEZE/THAW CALLBACK MECHANISM"> is supported to control
+serialization of blessed objects.
+
+Any other options passed to the plugin will be used as attributes to build the
+L<Mojo::IOLoop::Subprocess> object.
 
 Note that it does not increase the timeout of the connection, so if your forked
 process is going to take a very long time, you might need to increase that
