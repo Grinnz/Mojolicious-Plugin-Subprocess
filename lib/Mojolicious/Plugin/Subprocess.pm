@@ -4,7 +4,7 @@ use Mojo::Base 'Mojolicious::Plugin';
 use Mojo::IOLoop::Subprocess;
 use Scalar::Util 'weaken';
 
-our $VERSION = '0.003';
+our $VERSION = '0.004';
 
 my ($deserialize, $serialize);
 
