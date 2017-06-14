@@ -18,14 +18,14 @@ sub register {
       require Sereal::Decoder;
       Sereal::Decoder->VERSION('3.001');
       my $deserializer = Sereal::Decoder->new;
-      $deserialize = sub { Sereal::Decoder::sereal_decode_with_object $deserializer, $_[0] };
+      $deserialize = sub { Sereal::Decoder::sereal_decode_with_object($deserializer, $_[0]) };
     }
     $subprocess_args{deserialize} = $deserialize;
     unless (defined $serialize) {
       require Sereal::Encoder;
       Sereal::Encoder->VERSION('3.001');
       my $serializer = Sereal::Encoder->new({freeze_callbacks => 1});
-      $serialize = sub { Sereal::Encoder::sereal_encode_with_object $serializer, $_[0] };
+      $serialize = sub { Sereal::Encoder::sereal_encode_with_object($serializer, $_[0]) };
     }
     $subprocess_args{serialize} = $serialize;
   }
