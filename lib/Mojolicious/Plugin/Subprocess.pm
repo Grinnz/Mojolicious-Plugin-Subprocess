@@ -3,7 +3,7 @@ package Mojolicious::Plugin::Subprocess;
 use Mojo::Base 'Mojolicious::Plugin';
 use Mojo::IOLoop;
 
-our $VERSION = '1.000';
+our $VERSION = '1.001';
 
 sub register {
   my ($self, $app, $options) = @_;
